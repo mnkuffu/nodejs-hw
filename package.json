@@ -18,7 +18,7 @@
     "dev": "nodemon src/server.js"
   },
   "repository": {
-    "type": "module",
+    "type": "git",
     "url": "git+https://github.com/mnkuffu/nodejs-hw.git"
   },
   "keywords": [],

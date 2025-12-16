@@ -11,6 +11,7 @@ export const getAllNotes = async (req, res, next) => {
   }
 };
 
+
 export const getNoteById = async (req, res, next) => {
   try {
     const { noteId } = req.params;

@@ -21,8 +21,6 @@ app.use('/notes', notesRoutes);
 
 app.use(notFoundHandler);
 
-app.use(notFoundHandler);
-
 app.use(errorHandler);
 
 const startServer = async () => {

@@ -8,7 +8,8 @@ export const logger = pinoHttp({
       colorize: true,
       translateTime: 'HH:MM:ss',
       ignore: 'pid,hostname',
-      messageFormat: '[{req.method} {req.url}] {res.statusCode} in {responseTime}ms',
+      messageFormat: '{req.method} {req.url}] {res.statusCode} in {responseTime}ms',
+      hideObject: true,
     },
   },
 });

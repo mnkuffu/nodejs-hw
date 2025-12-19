@@ -1,3 +1,4 @@
+
 import { HttpError } from "http-errors";
 
 export const errorHandler = (error, req, res, next) => {

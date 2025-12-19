@@ -1,6 +1,6 @@
-import pinoHttp from 'pino-http';
+import PinoHttp from 'pino-http';
 
-export const logger = pinoHttp({
+export const logger = PinoHttp({
   level: 'info',
   transport: {
     target: 'pino-pretty',
@@ -8,7 +8,8 @@ export const logger = pinoHttp({
       colorize: true,
       translateTime: 'HH:MM:ss',
       ignore: 'pid,hostname',
-      messageFormat: '{req.method} {req.url}] {res.statusCode} in {responseTime}ms',
+      messageFormat:
+        '{req.method} {req.url} {res.statusCode} - {responseTime}ms',
       hideObject: true,
     },
   },

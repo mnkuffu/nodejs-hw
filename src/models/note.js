@@ -1,21 +1,40 @@
-import { Schema, model } from 'mongoose';
+import mongoose from "mongoose";
 
-const noteSchema = new Schema(
+const noteSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, trim: true },
-    content: { type: String, required: false, default: '', trim: true },
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    content: {
+      type: String,
+      required: false,
+      default: '',
+      trim: true,
+    },
     tag: {
       type: String,
       required: false,
-      enum: TAGS,
+      enum: [
+        'Work',
+        'Personal',
+        'Meeting',
+        'Shopping',
+        'Ideas',
+        'Travel',
+        'Finance',
+        'Health',
+        'Important',
+        'Todo',
+      ],
       default: 'Todo',
     },
   },
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
-noteSchema.index({ title: 'text', content: 'text' });
 export const Note = mongoose.model("Note", noteSchema);

@@ -26,11 +26,12 @@ app.use(cookieParser());
 app.use('/notes', notesRoutes);
 app.use('/auth', authRouter);
 
+app.use(celebrateErrors());
+
 app.use(notFoundHandler);
 
 app.use(errorHandler);
 
-app.use(celebrateErrors());
 
 const startServer = async () => {
   await connectMongoDB();

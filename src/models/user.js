@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Remove password before sending back to client
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;

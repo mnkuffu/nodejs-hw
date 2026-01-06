@@ -9,6 +9,8 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { errors as celebrateErrors } from 'celebrate';
 
+dotenv.config();
+
 const PORT = process.env.PORT || 3000;
 
 const app = express();

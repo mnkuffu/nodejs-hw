@@ -20,11 +20,12 @@ app.use(express.json());
 
 app.use('/notes', notesRoutes);
 
+app.use(celebrateErrors());
+
 app.use(notFoundHandler);
 
 app.use(errorHandler);
 
-app.use(celebrateErrors());
 
 const startServer = async () => {
   await connectMongoDB();

@@ -11,8 +11,6 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { errors as celebrateErrors } from 'celebrate';
 import { authRouter } from './routes/authRoutes.js';
 
-dotenv.config();
-
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -31,7 +29,6 @@ app.use(celebrateErrors());
 app.use(notFoundHandler);
 
 app.use(errorHandler);
-
 
 const startServer = async () => {
   await connectMongoDB();

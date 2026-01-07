@@ -14,15 +14,13 @@ import {
   createNoteSchema,
   updateNoteSchema,
 } from '../validations/notesValidation.js';
-import { authenticate } from '../middleware/authenticate.js';
 
 const router = express.Router();
-router.use('/', authenticate);
 
-router.get('/', celebrate(getAllNotesSchema), getAllNotes);
-router.get('/:noteId', celebrate(noteIdSchema), getNoteById);
-router.post('/', celebrate(createNoteSchema), createNote);
-router.patch('/:noteId', celebrate(updateNoteSchema), updateNote);
-router.delete('/:noteId', celebrate(noteIdSchema), deleteNote);
+router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
+router.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
+router.post('/notes', celebrate(createNoteSchema), createNote);
+router.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
+router.delete('/notes/:noteId', celebrate(noteIdSchema), deleteNote);
 
 export default router;

@@ -9,7 +9,7 @@ import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { errors as celebrateErrors } from 'celebrate';
-import { authRouter } from './routes/authRoutes.js';
+import  authRouter  from './routes/authRoutes.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,12 +21,12 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/notes', notesRoutes);
-app.use('/auth', authRouter);
-
-app.use(celebrateErrors());
+app.use(notesRoutes);
+app.use(authRouter);
 
 app.use(notFoundHandler);
+
+app.use(celebrateErrors());
 
 app.use(errorHandler);
 

@@ -1,5 +1,6 @@
 import express from 'express';
 import { celebrate } from 'celebrate';
+
 import {
   registerUserSchema,
   loginUserSchema,
@@ -11,9 +12,12 @@ import {
   logoutUser,
 } from '../controllers/authController.js';
 
-export const authRouter = express.Router();
 
-authRouter.post('/register', celebrate(registerUserSchema), registerUser);
-authRouter.post('/login', celebrate(loginUserSchema), loginUser);
-authRouter.post('/refresh', refreshUserSession);
-authRouter.post('/logout', logoutUser);
+const router = express.Router();
+
+router.post('/auth/register', celebrate(registerUserSchema), registerUser);
+router.post('/auth/login', celebrate(loginUserSchema), loginUser);
+router.post('/auth/refresh', refreshUserSession);
+router.post('/auth/logout', logoutUser);
+
+export default router;

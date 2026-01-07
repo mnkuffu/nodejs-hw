@@ -21,18 +21,17 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Default username = email
+userSchema.pre('save', function () {
+  if (!this.username) {
+    this.username = this.email;
+  }
+});
+
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   return obj;
 };
-
-// Default username = email
-userSchema.pre('save', function (next) {
-  if (!this.username) {
-    this.username = this.email;
-  }
-  next();
-});
 
 export const User = mongoose.model('User', userSchema);

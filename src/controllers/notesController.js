@@ -26,7 +26,7 @@ export const getAllNotes = async (req, res) => {
 };
 
 export const getNoteById = async (req, res, next) => {
-  try {
+
     const { noteId } = req.params;
     const userId = req.user._id;
 
@@ -34,25 +34,19 @@ export const getNoteById = async (req, res, next) => {
     if (!note) throw createHttpError(404, 'Note not found');
 
     res.status(200).json(note);
-  } catch (error) {
-    next(error);
-  }
 };
 
 export const createNote = async (req, res, next) => {
-  try {
+
     const userId = req.user._id;
 
     const newNote = await Note.create({ ...req.body, userId });
 
     res.status(201).json(newNote);
-  } catch (error) {
-    next(error);
-  }
 };
 
-export const updateNote = async (req, res, next) => {
-  try {
+  export const updateNote = async (req, res, next) => {
+  
     const { noteId } = req.params;
     const userId = req.user._id;
 
@@ -65,13 +59,10 @@ export const updateNote = async (req, res, next) => {
     if (!updated) throw createHttpError(404, 'Note not found');
 
     res.status(200).json(updated);
-  } catch (error) {
-    next(error);
-  }
 };
 
 export const deleteNote = async (req, res, next) => {
-  try {
+
     const { noteId } = req.params;
     const userId = req.user._id;
 
@@ -80,7 +71,4 @@ export const deleteNote = async (req, res, next) => {
     if (!deleted) throw createHttpError(404, 'Note not found');
 
     res.status(200).json(deleted);
-  } catch (error) {
-    next(error);
-  }
 };

@@ -4,8 +4,8 @@ import { User } from '../models/user.js';
 import { Session } from '../models/session.js';
 import { createSession, setSessionCookies } from '../services/auth.js';
 
-export const registerUser = async (req, res, next) => {
-  try {
+export const registerUser = async (req, res) => {
+
     const { email, password } = req.body;
 
     const existing = await User.findOne({ email });
@@ -21,13 +21,10 @@ export const registerUser = async (req, res, next) => {
     setSessionCookies(res, session);
 
     res.status(201).json(user);
-  } catch (error) {
-    next(error);
-  }
 };
 
-export const loginUser = async (req, res, next) => {
-  try {
+export const loginUser = async (req, res) => {
+
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -42,13 +39,10 @@ export const loginUser = async (req, res, next) => {
     setSessionCookies(res, session);
 
     res.status(200).json(user);
-  } catch (error) {
-    next(error);
-  }
 };
 
-export const refreshUserSession = async (req, res, next) => {
-  try {
+export const refreshUserSession = async (req, res) => {
+  
     const { sessionId, refreshToken } = req.cookies;
 
     const session = await Session.findOne({ _id: sessionId, refreshToken });
@@ -64,13 +58,10 @@ export const refreshUserSession = async (req, res, next) => {
     setSessionCookies(res, newSession);
 
     res.status(200).json({ message: 'Session refreshed' });
-  } catch (error) {
-    next(error);
-  }
 };
 
-export const logoutUser = async (req, res, next) => {
-  try {
+export const logoutUser = async (req, res) => {
+  
     const { sessionId } = req.cookies;
 
     if (sessionId) {
@@ -82,7 +73,4 @@ export const logoutUser = async (req, res, next) => {
     res.clearCookie('refreshToken');
 
     res.sendStatus(204);
-  } catch (error) {
-    next(error);
-  }
 };

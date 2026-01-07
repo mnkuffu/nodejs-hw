@@ -20,10 +20,8 @@ export const getAllNotes = async (req, res, next) => {
     const [totalNotes, notes] = await Promise.all([
       query.clone().countDocuments(),
       query
-        .sort({ createdAt: -1 })
         .skip((page - 1) * perPage)
         .limit(perPage)
-        .exec(),
     ]);
     const totalPages = Math.ceil(totalNotes / perPage) || 1;
 

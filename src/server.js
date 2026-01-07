@@ -18,14 +18,13 @@ app.use(logger);
 app.use(cors());
 app.use(express.json());
 
-app.use('/notes', notesRoutes);
-
-app.use(celebrateErrors());
+app.use(notesRoutes);
 
 app.use(notFoundHandler);
 
-app.use(errorHandler);
+app.use(celebrateErrors());
 
+app.use(errorHandler);
 
 const startServer = async () => {
   await connectMongoDB();

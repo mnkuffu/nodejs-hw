@@ -9,21 +9,25 @@ export const getAllNotes = async (req, res, next) => {
     const perPage = Number(req.query.perPage) || 10;
     const { tag, search } = req.query;
 
-    const filter = {};
-    if (tag) filter.tag = tag;
-    if (search && search.trim() !== '') {
-      
-      filter.$text = { $search: search };
+    let query = Note.find();
+
+    if (tag) {
+      query = query.where('tag').equals(tag);
     }
 
-    const totalNotes = await Note.countDocuments(filter);
-    const totalPages = Math.ceil(totalNotes / perPage) || 1;
+    if (search && search.trim() !== '') {
+      query = query.where({ $text: { $search: search } });
+    }
 
-    const notes = await Note.find(filter)
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * perPage)
-      .limit(perPage)
-      .exec();
+    const [totalNotes, notes] = await Promise.all([
+      query.clone().countDocuments(),
+      query
+        .sort({ createdAt: -1 })
+        .skip((page - 1) * perPage)
+        .limit(perPage)
+        .exec(),
+    ]);
+    const totalPages = Math.ceil(totalNotes / perPage) || 1;
 
     res.status(200).json({
       page,

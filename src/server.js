@@ -21,12 +21,11 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/notes', notesRoutes);
-app.use('/auth', authRouter);
-
-app.use(celebrateErrors());
+app.use(notesRoutes);
 
 app.use(notFoundHandler);
+
+app.use(celebrateErrors());
 
 app.use(errorHandler);
 
